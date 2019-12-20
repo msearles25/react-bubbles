@@ -17,11 +17,11 @@ const ColorList = ({ colors, updateColors}) => {
     setColorToEdit(color);
   };
 
-  useEffect(() => {
-      axiosWithAuth()
-        .get('/colors')
-        .then(res => updateColors(res.data))
-  }, [setColorToEdit])
+  // useEffect(() => {
+  //     axiosWithAuth()
+  //       .get('/colors')
+  //       .then(res => updateColors(res.data))
+  // }, [])
 
   const saveEdit = e => {
     e.preventDefault();
@@ -31,6 +31,11 @@ const ColorList = ({ colors, updateColors}) => {
 
     axiosWithAuth()
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then(() => {
+        axiosWithAuth()
+          .get('/colors')
+          .then(res => updateColors(res.data))
+      })
       // .then(res => updateColors([...colors, res.data]))
   };
 
@@ -38,7 +43,11 @@ const ColorList = ({ colors, updateColors}) => {
     // make a delete request to delete this color
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
-      // .then()
+      .then(() => {
+        axiosWithAuth()
+          .get('/colors')
+          .then(res => updateColors(res.data))
+      })
   };
 
   return (
