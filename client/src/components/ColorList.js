@@ -8,7 +8,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [newColor, setNewColor] = useState({
@@ -34,7 +33,6 @@ const ColorList = ({ colors, updateColors }) => {
           .get('/colors')
           .then(res => updateColors(res.data))
       })
-    // .then(res => updateColors([...colors, res.data]))
   };
 
   const deleteColor = color => {
@@ -45,7 +43,7 @@ const ColorList = ({ colors, updateColors }) => {
         updateColors(colors.filter(color => color.id !== res.data))  
       })
   };
-
+  // first way that I deleted a color.
   // .then(() => {
   //   axiosWithAuth()
   //     .get('/colors')
