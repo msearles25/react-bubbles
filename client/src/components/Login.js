@@ -10,9 +10,9 @@ const Login = props => {
     password: ''
   })
 
-  const loginChange = e => [
+  const loginChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value })
-  ]
+  }
 
   const loginSubmit = e => {
     e.preventDefault();
